@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "988636468577",
+    "firebase_url": "https://holachat-43b70.firebaseio.com",
+    "project_id": "holachat-43b70",
+    "storage_bucket": "holachat-43b70.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988636468577:android:619ced230eb91be7",
+        "android_client_info": {
+          "package_name": "co.paulfran.paulfranco.holachat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "988636468577-0hlh8pu3rohe90aqjmlgvsb1cnibmqo4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.paulfran.paulfranco.holachat",
+            "certificate_hash": "cec7ad9534e29dda3706e32a1b9026f3649520f2"
+          }
+        },
+        {
+          "client_id": "988636468577-qscdne94lnes2udjc0mn7h0jqsvsmskt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnLm_nWPkFsJrtrHZOJ6avRSzNZBY4ra8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "988636468577-qscdne94lnes2udjc0mn7h0jqsvsmskt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

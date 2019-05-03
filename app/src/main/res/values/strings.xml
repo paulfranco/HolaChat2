@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Hola Chat</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="action_logout">Logout</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="button_login">Login</string>
+    <string name="text_signup"><u>Register Your Account Today</u></string>
+    <string name="hint_name">Name</string>
+    <string name="hint_phone">Phone</string>
+    <string name="button_signup">Signup</string>
+    <string name="text_login"><u>Already Have An Account? Go to Login</u></string>
+    <string name="action_profile">Profile</string>
+    <string name="text_apply">Apply</string>
+    <string name="text_delete">Delete</string>
+
+
+</resources>
