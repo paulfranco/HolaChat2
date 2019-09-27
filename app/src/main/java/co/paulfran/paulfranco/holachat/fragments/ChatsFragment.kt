@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 
 import co.paulfran.paulfranco.holachat.R
+import co.paulfran.paulfranco.holachat.activities.ConversationActivity
 import co.paulfran.paulfranco.holachat.adapters.ChatsAdapter
 import co.paulfran.paulfranco.holachat.listeners.ChatClickListener
 import co.paulfran.paulfranco.holachat.listeners.FailureCallback
@@ -135,8 +136,10 @@ class ChatsFragment : Fragment(), ChatClickListener {
                 }
     }
 
-    override fun onChatClicked(name: String?, otheruserId: String?, chatImageUrl: String?, chatName: String?) {
-        Toast.makeText(context, "$name clicked", Toast.LENGTH_SHORT).show()
+    override fun onChatClicked(chatId: String?, otheruserId: String?, chatImageUrl: String?, chatName: String?) {
+        //Toast.makeText(context, "$name clicked", Toast.LENGTH_SHORT).show()
+
+        startActivity(ConversationActivity.newIntent(context, chatId, chatImageUrl, otheruserId, chatName))
     }
 
 }

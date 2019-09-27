@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 
 import android.support.v4.app.Fragment
@@ -17,28 +16,21 @@ import android.support.design.widget.TabLayout
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import co.paulfran.paulfranco.holachat.R
 import co.paulfran.paulfranco.holachat.fragments.ChatsFragment
-import co.paulfran.paulfranco.holachat.fragments.StatusFragment
+import co.paulfran.paulfranco.holachat.fragments.StatusListFragment
 import co.paulfran.paulfranco.holachat.fragments.StatusUpdateFragment
 import co.paulfran.paulfranco.holachat.listeners.FailureCallback
-import co.paulfran.paulfranco.holachat.util.DATA_USERS
-import co.paulfran.paulfranco.holachat.util.DATA_USER_PHONE
-import co.paulfran.paulfranco.holachat.util.PERMISSIONS_REQUEST_READ_CONTACTS
-import co.paulfran.paulfranco.holachat.util.REQUEST_NEW_CHAT
+import co.paulfran.paulfranco.holachat.util.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_main.view.*
-import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity(), FailureCallback {
 
@@ -49,7 +41,7 @@ class MainActivity : AppCompatActivity(), FailureCallback {
 
     private val chatsFragment = ChatsFragment()
     private val statusUpdateFragment = StatusUpdateFragment()
-    private val statusFragment = StatusFragment()
+    private val statusListFragment = StatusListFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,7 +73,10 @@ class MainActivity : AppCompatActivity(), FailureCallback {
                 when(tab?.position) {
                     0 -> {fab.hide()}
                     1 -> {fab.show()}
-                    2 -> {fab.hide()}
+                    2 -> {
+                        fab.hide()
+                        statusListFragment.onVisible()
+                    }
                 }
             }
 
@@ -125,17 +120,26 @@ class MainActivity : AppCompatActivity(), FailureCallback {
             }
         } else {
             // permission granted
-            startNewActivity()
+            startNewActivity(REQUEST_NEW_CHAT)
         }
     }
 
-    fun startNewActivity() {
-        startActivityForResult(ContactsActivity.newIntent(this), REQUEST_NEW_CHAT)
+    fun startNewActivity(requestCode: Int) {
+        when (requestCode) {
+            REQUEST_NEW_CHAT -> startActivityForResult(ContactsActivity.newIntent(this), REQUEST_NEW_CHAT)
+            REQUEST_CODE_PHOTO -> {
+                val intent = Intent(Intent.ACTION_PICK)
+                intent.type = "image/*"
+                startActivityForResult(intent, REQUEST_CODE_PHOTO)
+            }
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
+                REQUEST_CODE_PHOTO -> statusUpdateFragment.storeImage(data?.data)
                 REQUEST_NEW_CHAT -> {
                     val name = data?.getStringExtra(PARAM_NAME) ?: ""
                     val phone = data?.getStringExtra(PARAM_PHONE) ?: ""
@@ -182,7 +186,7 @@ class MainActivity : AppCompatActivity(), FailureCallback {
         when (requestCode) {
             PERMISSIONS_REQUEST_READ_CONTACTS -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    startNewActivity()
+                    startNewActivity(REQUEST_NEW_CHAT)
                 }
             }
         }
@@ -231,8 +235,8 @@ class MainActivity : AppCompatActivity(), FailureCallback {
             return when(position) {
                 0 -> statusUpdateFragment
                 1 -> chatsFragment
-                2 -> statusFragment
-                else -> statusFragment
+                2 -> statusListFragment
+                else -> statusListFragment
             }
         }
 

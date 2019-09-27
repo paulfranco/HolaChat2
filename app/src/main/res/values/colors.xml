@@ -12,4 +12,6 @@
 
     <color name="transparent_white">#ccffffff</color>
     <color name="transparent_grey">#99cccccc</color>
+
+    <color name="shadow_color">#ca666666</color>
 </resources>

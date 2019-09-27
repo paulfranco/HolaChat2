@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.StatusFragment">
+    tools:context=".fragments.StatusListFragment">
 
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/statusListRV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Status Fragment" />
+        android:layout_height="match_parent"/>
+
 
 </FrameLayout>
